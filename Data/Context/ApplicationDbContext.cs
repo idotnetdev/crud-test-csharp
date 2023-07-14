@@ -3,6 +3,7 @@ using System.Reflection.Emit;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Data.Context;
 
@@ -21,7 +22,13 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
+        ApplyAudits(ChangeTracker);
         return await base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void ApplyAudits(ChangeTracker changeTracker)
+    {
+        changeTracker.SetAuditableEntityPropertyValues();
     }
 }
 

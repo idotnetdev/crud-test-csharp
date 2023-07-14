@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Application;
+using FluentValidation.AspNetCore;
+using Application.Infrastructure;
 
 namespace Mc2.CrudTest.Presentation;
 
@@ -14,10 +16,12 @@ public class Program
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddApplicationServices(builder.Configuration);
 
-
+        builder.Services.AddFluentValidationAutoValidation();
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
+
+        EngineContext.Initialize(builder.Services);
 
         var app = builder.Build();
 
