@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Data.Context;
 public interface IApplicationDbContext
@@ -13,4 +14,6 @@ public interface IApplicationDbContext
     DbSet<T> Set<T>() where T : class;
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    void MarkAsChanged<TEntity>(TEntity entity) where TEntity : class;
+    EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 }

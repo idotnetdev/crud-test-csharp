@@ -50,6 +50,7 @@ public static class AuditableShadowProperties
 
     public static void SetModifiedPropeties(this EntityEntry<BaseAuditedEntity> entityEntry)
     {
+        entityEntry.Property(CreatedOn).IsModified = false;
         entityEntry.Property(ModifiedOn).CurrentValue = DateTime.Now;
     }
 }

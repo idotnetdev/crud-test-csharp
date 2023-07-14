@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities;
-public class Customer : BaseAuditedEntity
+namespace Application.Models.Customers.ResponseModels;
+public class CustomerModel
 {
+    public int Id { get; set; }
     public string Firstname { get; set; }
 
     public string Lastname { get; set; }
@@ -20,17 +21,5 @@ public class Customer : BaseAuditedEntity
 
     public string BankAccountNumber { get; set; }
 
-    [NotMapped]
-    public string FullName
-    {
-        get
-        {
-            return $"{Firstname} {Lastname}";
-        }
-    }
-
-    public override string ToString()
-    {
-        return $"{FullName} => {Email}, {PhoneNumber}";
-    }
+    public string FullName { get; set; }
 }

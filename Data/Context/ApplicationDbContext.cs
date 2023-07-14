@@ -30,5 +30,11 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         changeTracker.SetAuditableEntityPropertyValues();
     }
+
+    public void MarkAsChanged<TEntity>(TEntity entity) where TEntity : class
+    {
+        Entry(entity).State = EntityState.Detached;
+        Update(entity);
+    }
 }
 

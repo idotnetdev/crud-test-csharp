@@ -16,7 +16,7 @@ public class Program
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddApplicationServices(builder.Configuration);
 
-        builder.Services.AddFluentValidationAutoValidation();
+        //builder.Services.AddFluentValidationAutoValidation();
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
