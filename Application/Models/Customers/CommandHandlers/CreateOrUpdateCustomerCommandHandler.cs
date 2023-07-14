@@ -14,11 +14,10 @@ public class CreateOrUpdateCustomerCommandHandler : IRequestHandler<CreateOrUpda
 {
     public async Task<ApiResult<object>> Handle(CreateOrUpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var validator = EngineContext.Resolve<IValidator<CreateOrUpdateCustomerCommand>>();
-        var result = validator.Validate(request);
-        if (!result.IsValid)
+        var validator = new CreateOrUpdateCustomerCommandValidator().Validate(request);
+        if (!validator.IsValid)
         {
-            return new ApiResult<object>(null, 400, result.Errors.AsString());
+            return new ApiResult<object>(null, 400, validator.Errors.AsString());
         }
 
         var customerService = EngineContext.Resolve<ICustomerService>();

@@ -15,5 +15,11 @@ public static class EngineContext
         _serviceProvider = services.BuildServiceProvider();
     }
 
+    public static void Initialize(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
+
     public static T Resolve<T>() => _serviceProvider.GetService<T>();
 }
+
