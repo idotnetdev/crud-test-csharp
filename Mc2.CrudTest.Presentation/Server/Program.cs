@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Application;
 
 namespace Mc2.CrudTest.Presentation;
 
@@ -9,6 +10,11 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddApplicationServices(builder.Configuration);
+
+
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
